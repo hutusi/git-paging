@@ -1,0 +1,12 @@
+#!/bin/sh
+
+next() {
+	branch=refs/heads/master
+	if [ -z "$1" ]; then
+		n=1
+	else
+		n=$1
+	fi
+	git log --reverse --pretty=%H $branch | grep -A $n $(git rev-parse HEAD) | tail -1 | xargs git checkout
+}
+next "$@"

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+last() {
+	branch=refs/heads/master
+	git log --pretty=%H $branch | head -1 | xargs git checkout 
+}
+last "$@"

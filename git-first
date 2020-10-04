@@ -1,0 +1,7 @@
+#!/bin/sh
+
+first() {
+	branch=refs/heads/master
+	git log --reverse --pretty=%H $branch | head -1 | xargs git checkout 
+}
+first "$@"
