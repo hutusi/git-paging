@@ -1,7 +1,7 @@
 #!/bin/sh
 
 first() {
-	branch=refs/heads/master
+	branch=`git symbolic-ref refs/remotes/origin/HEAD`
 	git log --reverse --pretty=%H $branch | head -1 | xargs git checkout 
 }
 first "$@"
