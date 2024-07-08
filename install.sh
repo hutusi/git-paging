@@ -1,1 +1,2 @@
-cp ./git-* ~/bin/
+#!/bin/sh
+install -m 755 git-* /usr/local/bin
