@@ -1,0 +1,21 @@
+[alias]
+    swc-first = !"first() { \
+        REMOTE=\"$(git remote)\"; \
+        branch=\"${1:-$(git symbolic-ref \"refs/remotes/$REMOTE/HEAD\")}\"; \
+        git switch --detach $(git log --reverse --pretty=%H \"$branch\" | head -1); \
+    };first"
+    swc-last = !"last(){ \
+        REMOTE=\"$(git remote)\"; \
+        branch=\"${1:-$(git symbolic-ref \"refs/remotes/$REMOTE/HEAD\")}\"; \
+        git switch --detach $(git log -n 1 --pretty=%H \"$branch\"); \
+    };last"
+    swc-prev = !"prev(){ \
+        n=\"${1:-1}\"; \
+        git checkout HEAD~$n; \
+    };prev"
+    swc-next = !"next(){ \
+        REMOTE=\"$(git remote)\"; \
+        branch=\"${1:-$(git symbolic-ref \"refs/remotes/$REMOTE/HEAD\")}\"; \
+        n=\"${1:-1}\"; \
+        git switch --detach $(git log --reverse --pretty=%H \"$branch\" | grep -A $n $(git rev-parse HEAD) | tail -1); \
+    };next"
