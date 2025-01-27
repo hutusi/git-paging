@@ -1,0 +1,14 @@
+#!/bin/sh
+
+hist() {
+    if test -z $1;then
+        REMOTE=$(git remote)
+        params=${1:-$(git symbolic-ref "refs/remotes/$REMOTE/HEAD")}
+    else
+        params="$@"
+    fi
+    git log --color --graph --abbrev-commit \
+        --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<author:%an == commitor:%cn>%Creset' \
+        $params
+}
+hist "$@"
